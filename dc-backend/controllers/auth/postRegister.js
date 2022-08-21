@@ -32,7 +32,7 @@ const postRegister = async (req, res) => {
         );
 
         res.status(201).json({
-            newUser: {
+            userDetails: {
                 mail: createdUser.mail,
                 token: token,
                 username: createdUser.username

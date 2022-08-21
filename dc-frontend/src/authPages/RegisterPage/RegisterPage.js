@@ -4,9 +4,13 @@ import RegisterPageFooter from './RegisterPageFooter';
 import RegisterPageHeader from './RegisterPageHeader';
 import RegisterPageInputs from './RegisterPageInputs';
 import { validateRegisterForm } from '../../shared/utils/validators';
+import { connect } from 'react-redux';
+import { getActions } from '../../store/actions/authActions';
+import { useNavigate } from 'react-router-dom';
 
-const RegisterPage = () => {
+const RegisterPage = ({register}) => {
 
+    const history = useNavigate();
     const [mail, setMail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,6 +27,13 @@ const RegisterPage = () => {
     const handleRegister = () => {
         console.log(mail, password, username)
         console.log('Registering!');
+
+        const userDetails = {
+            mail,
+            password,
+            username,
+        };
+        register(userDetails, history);
     };
 
     return (
@@ -43,4 +54,11 @@ const RegisterPage = () => {
     );
 };
 
-export default RegisterPage;
+
+const mapActionsToProps = (dispatch) => {
+    return {
+        ...getActions(dispatch)
+    };
+};
+
+export default connect(null, mapActionsToProps)(RegisterPage);
