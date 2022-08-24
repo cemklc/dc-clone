@@ -8,7 +8,7 @@ import AppBar from './AppBar/AppBar';
 import { logout } from '../shared/utils/auth';
 import { connect } from 'react-redux';
 import { getActions } from '../store/actions/authActions';
-import { connectWithSocketServer } from '../realtimeCommunication/socketConnection';
+import { connectWithSocketServer, disconnectSocket } from '../realtimeCommunication/socketConnection';
 
 
 
@@ -29,7 +29,8 @@ const Dashboard = ({ setUserDetails }) => {
             setUserDetails(JSON.parse(userDetails));
             connectWithSocketServer(JSON.parse(userDetails));
         }
-        console.log('USING EFFECT');
+
+        return () => disconnectSocket();
     }, []);
 
     return (

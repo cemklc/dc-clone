@@ -50,7 +50,7 @@ export const register = async (data) => {
 
 export const sendFriendInvitation = async (data) => {
     try {
-        return await apiClient.post('/friend-invitation/invite', data);
+        return await apiClient.post('/friend-invitations/invite', data);
     } catch (exception) {
         checkResponse(exception);
         return {
