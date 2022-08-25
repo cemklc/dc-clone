@@ -7,15 +7,15 @@ const apiClient = axios.create({
 });
 
 
-apiClient.interceptors.request.use((config) =>{
+apiClient.interceptors.request.use((config) => {
     const userDetails = localStorage.getItem('user');
 
-    if (userDetails){
+    if (userDetails) {
         const token = JSON.parse(userDetails).token;
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
-},(err) => {
+}, (err) => {
     return Promise.reject(err);
 });
 
@@ -47,6 +47,18 @@ export const register = async (data) => {
 
 
 // secured routes
+
+export const sendFriendInvitation = async (data) => {
+    try {
+        return await apiClient.post('/friend-invitations/invite', data);
+    } catch (exception) {
+        checkResponse(exception);
+        return {
+            error: true,
+            exception,
+        }
+    }
+}
 
 const checkResponse = (exception) => {
     const responseCode = exception?.response?.status;
