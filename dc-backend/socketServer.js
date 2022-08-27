@@ -21,7 +21,7 @@ const registerSocketServer = (server) => {
         console.log('user connected');
         console.log(socket.id);
 
-        newConnectionHandler(socket, io);
+        newConnectionHandler(socket, io); // handler for first connection
 
         socket.on('disconnect', () => {
             disconnectHandler(socket);

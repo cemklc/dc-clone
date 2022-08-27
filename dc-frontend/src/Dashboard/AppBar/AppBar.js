@@ -22,6 +22,7 @@ const MainContainer = styled('div')({
 const AppBar = () => {
     return (
         <MainContainer>
+            {/* <UserInfo /> */}
             <DropdownMenu />
         </MainContainer>
     );
