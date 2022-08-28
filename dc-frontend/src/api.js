@@ -52,7 +52,7 @@ export const sendFriendInvitation = async (data) => {
     try {
         return await apiClient.post('/friend-invitations/invite', data);
     } catch (exception) {
-        checkResponse(exception);
+        checkResponseCode(exception);
         return {
             error: true,
             exception,
@@ -60,10 +60,36 @@ export const sendFriendInvitation = async (data) => {
     }
 }
 
-const checkResponse = (exception) => {
+export const acceptFriendInvitation = async (data) => {
+    try {
+        return await apiClient.post('/friend-invitations/accept', data)
+    } catch (exception) {
+        checkResponseCode(exception);
+        return {
+            error: true,
+            exception,
+        }
+    }
+}
+
+export const rejectFriendInvitation = async (data) => {
+    try {
+        return await apiClient.post('/friend-invitations/reject', data)
+    } catch (exception) {
+        checkResponseCode(exception);
+        return {
+            error: true,
+            exception,
+        }
+    }
+}
+
+
+const checkResponseCode = (exception) => {
     const responseCode = exception?.response?.status;
 
     if (responseCode) {
         (responseCode === 401 || responseCode === 403) && logout();
     };
 };
+

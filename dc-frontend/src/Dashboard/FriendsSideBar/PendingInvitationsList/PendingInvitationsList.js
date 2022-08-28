@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/system';
 import PendingInvitationsListItem from './PendingInvitationsListItem';
+import { connect } from 'react-redux';
 
 const DUMMY_INVITATIONS = [
     {
@@ -30,10 +31,10 @@ const MainContainer = styled('div')({
     overflow: 'auto',
 })
 
-const PendingInvitationsList = () => {
+const PendingInvitationsList = ({ pendingFriendsInvitations }) => {
     return (
         <MainContainer>
-            {DUMMY_INVITATIONS.map((invitation) => (
+            {pendingFriendsInvitations.map((invitation) => (
                 <PendingInvitationsListItem
                     key={invitation._id}
                     id={invitation._id}
@@ -45,4 +46,11 @@ const PendingInvitationsList = () => {
     );
 };
 
-export default PendingInvitationsList;
+
+const mapStoreStateToProps = ({ friends }) => {
+    return {
+        ...friends,
+    };
+};
+
+export default connect(mapStoreStateToProps)(PendingInvitationsList);
