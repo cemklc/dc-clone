@@ -38,6 +38,9 @@ const postAccept = async (req, res) => {
         friendsUpdates.updateFriendsPendingInvitations(receiverId.toString());
 
         // update the list of friends in the dashboard
+        friendsUpdates.updateFriends(senderId.toString());
+        friendsUpdates.updateFriends(receiverId.toString());
+
 
         return res.status(200).send('Friend invitation accepted!');
 
